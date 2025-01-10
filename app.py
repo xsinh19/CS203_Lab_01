@@ -1,30 +1,11 @@
 import json
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash
-from opentelemetry import trace
-from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.jaeger.thrift import JaegerExporter
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
-from opentelemetry.trace import SpanKind
 
 # Flask App Initialization
 app = Flask(__name__)
 app.secret_key = 'secret'
 COURSE_FILE = 'course_catalog.json'
-
-# OpenTelemetry Setup
-resource = Resource.create({"service.name": "course-catalog-service"})
-trace.set_tracer_provider(TracerProvider(resource=resource))
-tracer = trace.get_tracer(__name__)
-jaeger_exporter = JaegerExporter(
-    agent_host_name="localhost",
-    agent_port=6831,
-)
-span_processor = BatchSpanProcessor(jaeger_exporter)
-trace.get_tracer_provider().add_span_processor(span_processor)
-FlaskInstrumentor().instrument_app(app)
 
 
 # Utility Functions
@@ -49,31 +30,10 @@ def save_courses(data):
 def index():
     return render_template('index.html')
 
-
 @app.route('/catalog')
 def course_catalog():
     courses = load_courses()
     return render_template('course_catalog.html', courses=courses)
-
-
-@app.route('/add_course', methods=['GET', 'POST'])
-def add_course():
-    if request.method == 'POST':
-        course = {
-            'code': request.form['code'],
-            'name': request.form['name'],
-            'instructor': request.form['instructor'],
-            'semester': request.form['semester'],
-            'schedule': request.form['schedule'],
-            'classroom': request.form['classroom'],
-            'prerequisites': request.form['prerequisites'],
-            'grading': request.form['grading'],
-            'description': request.form['description']
-        }
-        save_courses(course)
-        flash(f"Course '{course['name']}' added successfully!", "success")
-        return redirect(url_for('course_catalog'))
-    return render_template('add_course.html')
 
 
 @app.route('/course/<code>')
@@ -94,7 +54,6 @@ def manual_trace():
         span.set_attribute("http.url", request.url)
         span.add_event("Processing request")
         return "Manual trace recorded!", 200
-
 
 @app.route("/auto-instrumented")
 def auto_instrumented():
