@@ -37,10 +37,11 @@ logging.basicConfig(
 # Utility Functions
 def load_courses():
    """Load courses from the JSON file."""
-    if not os.path.exists(COURSE_FILE):
+   if not os.path.exists(COURSE_FILE):
         return []  # Return an empty list if the file doesn't exist
-    with open(COURSE_FILE, 'r') as file:
+   with open(COURSE_FILE, 'r') as file:
         return json.load(file)
+
 
 
 def save_courses(data):
