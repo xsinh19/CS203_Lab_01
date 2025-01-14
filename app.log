@@ -1,0 +1,57 @@
+2025-01-14 11:10:19,765 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.2.15:5000
+2025-01-14 11:10:19,765 INFO: [33mPress CTRL+C to quit[0m
+2025-01-14 11:10:19,766 INFO:  * Restarting with stat
+2025-01-14 11:10:20,088 WARNING:  * Debugger is active!
+2025-01-14 11:10:20,093 INFO:  * Debugger PIN: 300-524-915
+2025-01-14 11:10:28,861 INFO: Rendering index page
+2025-01-14 11:10:28,869 INFO: 10.0.2.2 - - [14/Jan/2025 11:10:28] "GET / HTTP/1.1" 200 -
+2025-01-14 11:13:02,996 INFO: Rendering course catalog with 2 courses
+2025-01-14 11:13:02,998 INFO: 10.0.2.2 - - [14/Jan/2025 11:13:02] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:13:04,510 INFO: 10.0.2.2 - - [14/Jan/2025 11:13:04] "GET /add HTTP/1.1" 200 -
+2025-01-14 11:13:26,122 INFO: Added new course: wiug
+2025-01-14 11:13:26,123 INFO: 10.0.2.2 - - [14/Jan/2025 11:13:26] "[32mPOST /add HTTP/1.1[0m" 302 -
+2025-01-14 11:13:26,127 INFO: Rendering course catalog with 3 courses
+2025-01-14 11:13:26,128 INFO: 10.0.2.2 - - [14/Jan/2025 11:13:26] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:13:28,011 INFO: Rendering course catalog with 3 courses
+2025-01-14 11:13:28,011 INFO: 10.0.2.2 - - [14/Jan/2025 11:13:28] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:13:29,973 INFO: Removed course with code: wieuwg
+2025-01-14 11:13:29,973 INFO: 10.0.2.2 - - [14/Jan/2025 11:13:29] "[32mPOST /remove/wieuwg HTTP/1.1[0m" 302 -
+2025-01-14 11:13:29,977 INFO: Rendering course catalog with 2 courses
+2025-01-14 11:13:29,977 INFO: 10.0.2.2 - - [14/Jan/2025 11:13:29] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:13:32,197 INFO: Rendering course catalog with 2 courses
+2025-01-14 11:13:32,198 INFO: 10.0.2.2 - - [14/Jan/2025 11:13:32] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:14:23,109 INFO: 10.0.2.2 - - [14/Jan/2025 11:14:23] "GET /add HTTP/1.1" 200 -
+2025-01-14 11:15:17,138 INFO: Added new course: wij
+2025-01-14 11:15:17,138 INFO: 10.0.2.2 - - [14/Jan/2025 11:15:17] "[32mPOST /add HTTP/1.1[0m" 302 -
+2025-01-14 11:15:17,142 INFO: Rendering course catalog with 3 courses
+2025-01-14 11:15:17,143 INFO: 10.0.2.2 - - [14/Jan/2025 11:15:17] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:15:19,202 INFO: 10.0.2.2 - - [14/Jan/2025 11:15:19] "GET /add HTTP/1.1" 200 -
+2025-01-14 11:15:30,973 INFO: Added new course: oowbgijqe
+2025-01-14 11:15:30,974 INFO: 10.0.2.2 - - [14/Jan/2025 11:15:30] "[32mPOST /add HTTP/1.1[0m" 302 -
+2025-01-14 11:15:30,977 INFO: Rendering course catalog with 4 courses
+2025-01-14 11:15:30,978 INFO: 10.0.2.2 - - [14/Jan/2025 11:15:30] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:15:32,529 INFO: 10.0.2.2 - - [14/Jan/2025 11:15:32] "GET /add HTTP/1.1" 200 -
+2025-01-14 11:15:38,424 INFO: Added new course: wrgjqw
+2025-01-14 11:15:38,424 INFO: 10.0.2.2 - - [14/Jan/2025 11:15:38] "[32mPOST /add HTTP/1.1[0m" 302 -
+2025-01-14 11:15:38,427 INFO: Rendering course catalog with 5 courses
+2025-01-14 11:15:38,428 INFO: 10.0.2.2 - - [14/Jan/2025 11:15:38] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:16:11,339 INFO: Removed course with code: ojgbwj
+2025-01-14 11:16:11,339 INFO: 10.0.2.2 - - [14/Jan/2025 11:16:11] "[32mPOST /remove/ojgbwj HTTP/1.1[0m" 302 -
+2025-01-14 11:16:11,343 INFO: Rendering course catalog with 4 courses
+2025-01-14 11:16:11,344 INFO: 10.0.2.2 - - [14/Jan/2025 11:16:11] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:16:12,200 INFO: Removed course with code: sjgwd
+2025-01-14 11:16:12,200 INFO: 10.0.2.2 - - [14/Jan/2025 11:16:12] "[32mPOST /remove/sjgwd HTTP/1.1[0m" 302 -
+2025-01-14 11:16:12,204 INFO: Rendering course catalog with 3 courses
+2025-01-14 11:16:12,205 INFO: 10.0.2.2 - - [14/Jan/2025 11:16:12] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:16:13,075 INFO: Removed course with code: iqijqbif
+2025-01-14 11:16:13,076 INFO: 10.0.2.2 - - [14/Jan/2025 11:16:13] "[32mPOST /remove/iqijqbif HTTP/1.1[0m" 302 -
+2025-01-14 11:16:13,079 INFO: Rendering course catalog with 2 courses
+2025-01-14 11:16:13,079 INFO: 10.0.2.2 - - [14/Jan/2025 11:16:13] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:18:15,028 INFO: 10.0.2.2 - - [14/Jan/2025 11:18:15] "GET /add HTTP/1.1" 200 -
+2025-01-14 11:19:08,204 INFO: Rendering course catalog with 2 courses
+2025-01-14 11:19:08,204 INFO: 10.0.2.2 - - [14/Jan/2025 11:19:08] "GET /catalog HTTP/1.1" 200 -
+2025-01-14 11:25:12,254 INFO:  * Detected change in '/home/hetpathak/CS203_Lab_01/app.py', reloading
+2025-01-14 11:25:12,284 INFO:  * Restarting with stat
