@@ -7,6 +7,7 @@ from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
+from opentelemetry.trace.status import Status, StatusCode
 import logging
 
 # Flask App Initialization
@@ -26,11 +27,16 @@ tracer = trace.get_tracer(__name__)
 FlaskInstrumentor().instrument_app(app)
 
 # Logging Configuration
+file_handler = logging.FileHandler("app.log")
+file_handler.setLevel(logging.INFO)  # Logs at INFO level and above (INFO, WARNING, ERROR, CRITICAL)
+
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)  # Logs at DEBUG level and above
+
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s %(levelname)s %(message)s',
-    handlers=[
-        logging.FileHandler("app.log")]
+    level=logging.DEBUG,  # Global log level
+    format='%(asctime)s %(levelname)s: %(message)s',
+    handlers=[file_handler, console_handler]
 )
 
 
@@ -83,33 +89,42 @@ def course_details(code):
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_course():
-    with tracer.start_as_current_span("Add course"):
+    with tracer.start_as_current_span("Add a course") as span:
         if request.method == 'POST':
             course_name = request.form.get('name')
             course_code = request.form.get('code')
             instructor = request.form.get('instructor')
-            semester = request.form.get('semester')
-            schedule = request.form.get('schedule')
-            classroom = request.form.get('classroom')
-            prerequisites = request.form.get('prerequisites', 'None')
-            grading = request.form.get('grading', 'Not specified')
-            description = request.form.get('description', 'No description provided')
 
-            if not course_name or not course_code or not instructor:
-                logging.error("Failed to add course: Missing required fields")
-                flash("Course name, code, and instructor are required.", "error")
+            # Server-side validation for required fields
+            missing_fields = []
+            if not course_name:
+                missing_fields.append("Course Name")
+            if not course_code:
+                missing_fields.append("Course Code")
+            if not instructor:
+                missing_fields.append("Instructor")
+
+            if missing_fields:
+                # Log the error in the app log and Jaeger
+                error_message = f"Missing required fields: {', '.join(missing_fields)}"
+                logging.error(error_message)
+                span.set_status(Status(StatusCode.ERROR, description=error_message))  # Mark error in Jaeger trace
+                
+                # Flash error message to the user
+                flash(f"Error: The following fields are required: {', '.join(missing_fields)}", "error")
                 return redirect(url_for('add_course'))
 
+            # Save the course if validation passes
             course_data = {
                 "name": course_name,
                 "code": course_code,
                 "instructor": instructor,
-                "semester": semester,
-                "schedule": schedule,
-                "classroom": classroom,
-                "prerequisites": prerequisites,
-                "grading": grading,
-                "description": description
+                "semester": request.form.get('semester', ''),
+                "schedule": request.form.get('schedule', ''),
+                "classroom": request.form.get('classroom', ''),
+                "prerequisites": request.form.get('prerequisites', 'None'),
+                "grading": request.form.get('grading', 'Not specified'),
+                "description": request.form.get('description', 'No description provided')
             }
 
             save_courses(course_data)
@@ -117,6 +132,8 @@ def add_course():
             flash(f"Course '{course_name}' added successfully!", "success")
             return redirect(url_for('course_catalog'))
 
+        # Render the form for adding a course
+        logging.info("Rendering add course page")
         return render_template('add_course.html')
 
 
