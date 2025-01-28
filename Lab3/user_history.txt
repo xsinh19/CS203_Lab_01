@@ -1,0 +1,150 @@
+    1  history
+    2  sudo apt list | grep -i python3.10
+    3  wget https://www.python.org/ftp/python/3.10.13/Python-3.10.13.tgz
+    4  ls
+    5  python3 -V
+    6  pip -V
+    7  tar -xvzf Python-3.10.13.tgz
+    8  ls
+    9  cd Python-3.10.13
+   10  ./configure --enable-optimizations
+   11  make
+   12  wget https://www.openssl.org/source/openssl-1.1.1.tar.gz
+   13  tar -xvzf openssl-1.1.1.tar.gz
+   14  cd openssl-1.1.1
+   15  ./config --prefix=$HOME/openssl --openssldir=$HOME/openssl
+   16  make
+   17  make install
+   18  export LD_LIBRARY_PATH=$HOME/openssl/lib:$LD_LIBRARY_PATH
+   19  export PATH=$HOME/openssl/bin:$PATH
+   20  export PKG_CONFIG_PATH=$HOME/openssl/lib/pkgconfig:$PKG_CONFIG_PATH
+   21  cd ..
+   22  make clean
+   23  ./configure --with-openssl=$HOME/openssl --enable-optimizations
+   24  make altinstall
+   25  ./configure --prefix=$HOME/python3.10 --with-openssl=$HOME/openssl --enable-optimizations
+   26  make altinstall
+   27  export PATH=$HOME/python3.10/bin:$PATH
+   28  python3.10 -V
+   29  python3.10 -m ssl
+   30  pip -V
+   31  python3.10 -m pip -V
+   32  cd
+   33  python3.10 -m venv ~/pip_env_3.10
+   34  ls
+   35  rm -rf Python-3.10.13.tgz
+   36  ls
+   37  source pip_env_3.10/bin/activate
+   38  pip install label-studio
+   39  label-studio
+   40  python3.10 -m test.test_support
+   41  wget https://www.sqlite.org/2025/sqlite-autoconf-3410000.tar.gz
+   42  wget https://www.sqlite.org/2025/sqlite-src-3480000.zip
+   43  tar -xvzf sqlite-src-3480000.zip
+   44  ls
+   45  rm -rf sqlite-src-3480000.zip
+   46  wget https://www.sqlite.org/2025/sqlite-autoconf-3480000.tar.gz
+   47  tar -xvzf sqlite-autoconf-3480000.tar.gz
+   48  cd sqlite-autoconf-3480000
+   49  ./configure --prefix=$HOME/sqlite
+   50  make
+   51  make install
+   52  export PATH=$HOME/sqlite/bin:$PATH
+   53  export LD_LIBRARY_PATH=$HOME/sqlite/lib:$LD_LIBRARY_PATH
+   54  sqlite3 --version
+   55  export PKG_CONFIG_PATH=$HOME/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH
+   56  cd
+   57  cd Python-3.10.13
+   58  ./configure --prefix=$HOME/python3.10 --with-openssl=$HOME/openssl --enable-optimizations --with-sqlite3=$HOME/sqlite
+   59  make clean
+   60  make
+   61  sudo apt install build-essential
+   62  make install
+   63  label-studio
+   64  sqlite3 --version
+   65  history
+   66  python3.10 -c "import sqlite3; print(sqlite3.sqlite_version)"
+   67  export PATH=$HOME/sqlite/bin:$PATH
+   68  export LD_LIBRARY_PATH=$HOME/sqlite/lib:$LD_LIBRARY_PATH
+   69  export PKG_CONFIG_PATH=$HOME/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH
+   70  ./configure
+   71  deactivate
+   72  ./configure --prefix=$HOME/python3.10 --with-openssl=$HOME/openssl --with-sqlite3=$HOME/sqlite --enable-optimizations
+   73  export LDFLAGS="-L$HOME/sqlite/lib"
+   74  export CPPFLAGS="-I$HOME/sqlite/include"
+   75  export PKG_CONFIG_PATH="$HOME/sqlite/lib/pkgconfig"
+   76  ./configure --prefix=$HOME/python3.10 --with-openssl=$HOME/openssl --enable-optimizations
+   77  make clean
+   78  make
+   79  python3.10 -c "import sqlite3; print(sqlite3.sqlite_version)"
+   80  cd
+   81  python3.10 -c "import sqlite3; print(sqlite3.sqlite_version)"
+   82  ls
+   83  ls $HOME/sqlite/lib
+   84  ls $HOME/sqlite/include
+   85  export LDFLAGS="-L$HOME/sqlite/lib"
+   86  export CPPFLAGS="-I$HOME/sqlite/include"
+   87  export PKG_CONFIG_PATH="$HOME/sqlite/lib/pkgconfig"
+   88  export LD_LIBRARY_PATH="$HOME/sqlite/lib:$LD_LIBRARY_PATH"
+   89  sqlite3 --version
+   90  ls $HOME/sqlite/bin
+   91  export PATH=$HOME/sqlite/bin:$PATH
+   92  echo $PATH
+   93  sqlite3 --version
+   94  python3.10 -c "import sqlite3; print(sqlite3.sqlite_version)"
+   95  ls
+   96  source pip_env_3.10/bin/activate
+   97  pip install label-studio
+   98  label-studio
+   99  deactivate
+  100  vim ~/.bashrc
+  101  cat .bashrc
+  102  source .bashrc
+  103  source pip_env_3.10/bin/activate
+  104  pip install label-studio
+  105  label-studio
+  106  history
+  107  pip -V
+  108  ~/python3.10/bin/python3.10 -c "import _sqlite3; print('SQLite3 module is available')"
+  109  cd Python-3.10.13
+  110  ./configure --prefix=$HOME/python3.10 --with-openssl=$HOME/openssl --enable-optimizations
+  111  vim ~/Python-3.10.13/Modules/setup.py
+  112  ls
+  113  cd Modules
+  114  ls
+  115  vim setup.py
+  116  cat setup.py
+  117  cd..
+  118  cd ..
+  119  cd
+  120  sudo apt install sqlite3 libsqlite3-dev
+  121  cd Python-3.10.13
+  122  make clean
+  123  ./configure --prefix=$HOME/python3.10 --with-openssl=$HOME/openssl --enable-optimizations
+  124  grep -i sqlite config.log
+  125  make
+  126  make altinstall
+  127  ~/python3.10/bin/python3.10 -c "import sqlite3; print(sqlite3.sqlite_version)"
+  128  cd
+  129  source ~/pip_env_3.10/bin/activate
+  130  pip install label-studio
+  131  label-studio
+  132  sudo apt install libffi-dev
+  133  cd ~/Python-3.10.13
+  134  make clean
+  135  deactivate
+  136  cd
+  137  sudo apt install build-essential zlib1g-dev libffi-dev libssl-dev libsqlite3-dev libreadline-dev libbz2-dev liblzma-dev tk-dev libgdbm-dev uuid-dev libdb-dev libncurses5-dev libncursesw5-dev
+  138  sudo apt update
+  139  sudo apt install build-essential zlib1g-dev libffi-dev libssl-dev libsqlite3-dev libreadline-dev libbz2-dev liblzma-dev tk-dev libgdbm-dev uuid-dev libdb-dev libncurses5-dev libncursesw5-dev
+  140  cd Python-3.10.13
+  141  make clean
+  142  ./configure --prefix=$HOME/python3.10 --with-openssl=$HOME/openssl --enable-optimizations
+  143  make
+  144  history
+  145  make altinstall
+  146  ~/python3.10/bin/python3.10 -c 'import ssl, sqlite3, bz2, lzma, zlib, readline, _ctypes, curses; print("All core modules loaded successfully!")'
+  147  source ~/pip_env_3.10/bin/activate
+  148  pip install label-studio
+  149  label-studio
+  150  history > user_history.txt
